@@ -1,0 +1,506 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+    .video-container {
+        background-color: black;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    video {
+        width: 90%;
+        max-width: 1200px;
+        height: auto;
+        object-fit: contain;
+        display: block;
+    }
+
+    .tagline {
+        color: white;
+        font-size: 1.7rem;
+        font-weight: 400;
+        margin-top: 20px;
+        max-width: 80%;
+        opacity: 0.9;
+        letter-spacing: 0.8px;
+    }
+
+    .neon-btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 180px;
+        height: 50px;  
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        border: 2px solid white;
+        color: white;
+        background-color: transparent;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: 0.3s ease-in-out;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .neon-btn:hover {
+        background-color: white;
+        color: black;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+        transform: scale(1.1); 
+    }
+
+    .button-container {
+        margin-top: 20px;
+        display: flex;
+        gap: 20px;
+    }
+
+</style>
+
+<div class="container-fluid video-container">
+    <video autoplay loop muted>
+        <source src="{% static 'videos/mv-title2.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video> 
+
+  
+    <p class="tagline">
+        An all-in-one project management ecosystem to streamline your workflow and boost productivity.
+    </p>
+
+    <div class="button-container">
+        <a href="{% url 'login' %}" class="neon-btn">Login</a>
+        <a href="{% url 'choose_role' %}" class="neon-btn">Get Started</a>
+    </div>
+</div>
+ 
+<style>
+   
+    .about-container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 40px 20px;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+        padding-top : 85px;
+    }
+
+ 
+    .about-heading {
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: white;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 4px solid white;
+        width: 0;
+        margin: 0 auto 50px; 
+        display: inline-block; 
+        animation: typing 3s steps(30, end) forwards, blink 0.7s infinite;
+    }
+
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 50%; }
+    }
+
+    @keyframes blink {
+        50% { border-color: transparent; }
+    }
+
+   
+    .card-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .about-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease-in-out;
+        color: black;
+        width: 320px;
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .about-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .about-card p, .about-card ul {
+        text-align: left;
+        padding-left: 15px; 
+    }
+
+    .about-card ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .about-card ul li {
+        display: flex;
+        align-items: center;
+        gap: 8px; 
+    }
+
+    .about-card ul li i {
+        color: #007bff; 
+        font-size: 1.2rem;
+    }
+
+    .icon {
+        font-size: 3rem;
+        color: #007bff;
+        margin-bottom: 10px;
+    }
+    .black-icon {
+        color: black !important;
+    }
+    
+    h4{
+        font-weight: bold;
+    }
+
+    .cta-btn {
+        
+        padding: 14px 24px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        text-decoration: none;
+        border-radius: 8px;
+        display: inline-block;
+        margin-top: 40px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+       
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        border: 2px solid white;
+        color: white;
+        background-color: transparent;
+        transition: 0.3s ease-in-out;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-btn:hover {
+        background-color: white;
+        color: black;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+        transform: scale(1.1); 
+    }
+    .button-container {
+        margin-top: 20px;
+        display: flex;
+        gap: 20px;
+    }
+</style>
+
+<div class="about-container">
+    <h2 class="about-heading">About ManageVerse</h2>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="about-card">
+                <div class="icon"><i class="fas fa-tasks"></i></div> 
+                <h4>What is ManageVerse?</h4>
+                <p>
+                    <i class="fas fa-tasks"></i> ManageVerse is a project management tool <br>
+                    <i class="fas fa-chart-line"></i> Track progress and meet deadlines
+                </p>
+                
+            </div>
+        </div>
+
+<div class="col-md-4">
+    <div class="about-card">
+        <div class="icon"><i class="fas fa-rocket"></i></div> 
+        <h4>Why We Built It?</h4>
+        <ul class="list-unstyled">
+            <li><i class="fas fa-check-circle black-icon"></i> Task management made simple</li>
+            <li><i class="fas fa-bolt black-icon"></i> Streamlined workflow for efficiency</li>
+            <li><i class="fas fa-tasks black-icon"></i> Track progress without complications</li>
+        </ul>
+        
+        
+    </div>
+</div>
+
+        <div class="col-md-4">
+            <div class="about-card">
+                <div class="icon"><i class="fas fa-users"></i></div> 
+                <h4>Who Can Use It?</h4>
+                <p>
+                    <i class="fas fa-user-graduate"></i> <b>Students</b> – Manage assignments & group projects <br>
+                    <i class="fas fa-people-group"></i> <b>Collaboration</b> – Organize work with teammates
+                </p>
+            </div>
+        </div>
+    </div>
+<div class="button-container"></div>
+
+    <a href="{% url 'choose_role' %}" class="cta-btn">Get Started for Free</a> </div>
+</div>
+
+<style>
+    .feature-container {
+        max-width: 1100px;
+        margin: auto;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Typewriter Effect */
+    .feature-heading {
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: white;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 4px solid white;
+        width: 0;
+        margin: 0 auto 50px; 
+        display: inline-block; 
+        animation: typing 3s steps(30, end) forwards, blink 0.7s infinite;
+    }
+
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 50%; }
+    }
+
+    @keyframes blink {
+        50% { border-color: transparent; }
+    }
+
+
+.feature-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; 
+}
+
+.feature-item .video-container {
+    max-width: 50%;
+}
+
+.description h4 {
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+
+.feature-item .video-container video {
+    width: 100%; 
+    height: auto;
+}
+
+.feature-item .description {
+    max-width: 50%;
+    font-size: 1.9rem;
+    color: white;
+    text-align: left;
+    padding-left: 0;
+    margin: 0; 
+}
+
+
+</style>
+
+<div class="feature-container">
+    <h2 class="feature-heading">Features Of ManageVerse</h2>
+    
+    <div class="feature-item">
+        <div class="video-container">
+            <video autoplay loop muted>
+                <source src="{% static 'videos/taskmngt.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="description">
+            <h4>Intuitive Task Management</h4>
+            <p>Easily organize, assign, and prioritize tasks through a simple, clean interface that simplifies project management.</p>
+        </div>
+    </div>
+
+     <div class="feature-item">
+        <div class="video-container">
+            <video autoplay loop muted>
+                <source src="{% static 'videos/track2.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="description">
+            <h4>Real-Time Progress Tracking</h4>
+            <p>Visualize task status with dynamic progress bars and charts, keeping you updated on project milestones.</p>
+        </div>
+    </div>
+    <div class="feature-item">
+        <div class="video-container">
+            <video autoplay loop muted>
+                <source src="{% static 'videos/collab.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="description">
+            <h4>Seamless Collaboration</h4>
+            <p>Collaborate effectively with team members by assigning roles, setting deadlines, and tracking progress in real-time.</p>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .contact-container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 40px 20px;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+    }
+    .contact-heading {
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: white;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 4px solid white;
+        width: 0;
+        margin: 0 auto 50px; 
+        display: inline-block; 
+        animation: typing 3s steps(30, end) forwards, blink 0.7s infinite;
+    }
+
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 50%; }
+    }
+
+    @keyframes blink {
+        50% { border-color: transparent; }
+    }
+    .contact-info {
+        text-align: center;
+    }
+
+    .contact-info h2 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .contact-info p {
+        font-size: 1rem;
+    }
+
+    .contact-form {
+        text-align: center;
+    }
+
+    .contact-form h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-size: 1rem;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    input:focus, textarea:focus {
+        border-color: #39ff14;
+    }
+
+    button {
+        background-color:rgb(119, 191, 215);
+        color: black;
+        font-size: 1rem;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+    }
+
+    button:hover {
+        background-color:rgb(0, 41, 152);
+    }
+
+    button:active {
+        background-color:rgb(105, 176, 209);
+    }
+</style>
+
+<section class="contact-section">
+    <div class="contact-container">
+        <h2 class="contact-heading">Contact Us</h2>
+        <h2>Send Us a Message</h2>
+
+        <div class="contact-form">
+            <form action="/submit-contact-form" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Message:</label>
+                    <textarea id="message" name="message" placeholder="Your message here..." rows="5" required></textarea>
+                </div>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock body %}

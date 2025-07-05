@@ -1,0 +1,105 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="container">
+        <h2><i class="material-icons">event</i> Set Deadline for : {{ project.name }}</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Select Deadline</label>
+                <input type="text" name="deadline" class="form-control" placeholder="YYYY-MM-DD">
+            </div>
+            <button type="submit" class="btn btn-success">Save Deadline</button>
+        </form>
+    </div>
+</div>
+
+<!-- Flatpickr Date Picker -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        flatpickr("input[name='deadline']", {
+            dateFormat: "Y-m-d",
+            minDate: "today"
+        });
+    });
+</script>
+
+<style>
+    /* Import Poppins Font */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f8f9fa;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    /* Centered Card Styling */
+    .card-container {
+        max-width: 500px;
+        width: 100%;
+        padding: 30px;
+        background: #ffffff;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    h2 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .material-icons {
+        font-size: 28px;
+        color: #28a745;
+    }
+    
+    .mb-3 {
+        text-align: left;
+    }
+    
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    
+    button.btn-success {
+        width: 100%;
+        padding: 12px;
+        font-size: 18px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out;
+
+        font-family: Poppins;
+    }
+    
+    button.btn-success:hover {
+        background: #218838;
+    }
+    
+</style>
+{% endblock %}

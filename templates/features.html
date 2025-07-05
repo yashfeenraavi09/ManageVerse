@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Features{% endblock title %}
+
+{% block body %}
+<style>
+    .feature-container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 40px 20px;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Typewriter Effect */
+    .feature-heading {
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: white;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 4px solid white;
+        width: 0;
+        margin: 0 auto 50px;
+        display: inline-block; 
+        animation: typing 3s steps(30, end) forwards, blink 0.7s infinite;
+    }
+
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 50%; }
+    }
+
+    @keyframes blink {
+        50% { border-color: transparent; }
+    }
+
+.feature-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.feature-item .video-container {
+    max-width: 50%; 
+}
+
+h4 {
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.feature-item .video-container video {
+    width: 100%;
+    height: auto; 
+}
+
+.feature-item .description {
+    max-width: 50%;
+    font-size: 1.9rem;
+    color: white;
+    text-align: left;
+}
+
+</style>
+
+<div class="feature-container">
+    <h2 class="feature-heading">Features Of ManageVerse</h2>
+    
+    <div class="feature-item">
+        <div class="video-container">
+            <video autoplay loop muted>
+                <source src="{% static 'videos/taskmngt.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="description">
+            <h4>Intuitive Task Management</h4>
+            <p>Easily organize, assign, and prioritize tasks through a simple, clean interface that simplifies project management.</p>
+        </div>
+    </div>
+
+     <div class="feature-item">
+        <div class="video-container">
+            <video autoplay loop muted>
+                <source src="{% static 'videos/track2.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="description">
+            <h4>Real-Time Progress Tracking</h4>
+            <p>Visualize task status with dynamic progress bars and charts, keeping you updated on project milestones.</p>
+        </div>
+    </div>
+
+    <div class="feature-item">
+        <div class="video-container">
+            <video autoplay loop muted>
+                <source src="{% static 'videos/collab.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="description">
+            <h4>Seamless Collaboration</h4>
+            <p>Collaborate effectively with team members by assigning roles, setting deadlines, and tracking progress in real-time.</p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock body %}

@@ -1,0 +1,273 @@
+
+{% block content %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&family=Outfit:wght@100..900&family=Ovo&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<!-- Bootstrap JS (Place before closing body tag) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="sidebar">
+    <h2>ManageVerse</h2>
+    <ul>
+        <li><a href="{% url 'manager_dashboard' %}"><span class="material-icons">dashboard</span> Dashboard</a></li>
+        <li><a href="{% url 'projects_page' %}"><span class="material-icons">assignment</span> Projects</a></li>
+        <li><a href="{% url 'settings_page' %}" class="active"><span class="material-icons">settings</span> Settings</a></li>
+        <li><a href="{% url 'logout' %}"><span class="material-icons">logout</span> Logout</a></li>
+    </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-container">
+    
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2>Welcome, {{ request.user.username }}!</h2>
+    </div>
+
+    <!-- Settings Content -->
+    <div class="container mt-4">
+        <h2>Settings</h2>
+        <hr>
+
+        <!-- Profile Settings -->
+        <h4>Profile Settings</h4>
+        <form method="POST" action="{% url 'update_profile' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" value="{{ user.username }}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" value="{{ user.email }}" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">Save Changes</button>
+        </form>
+
+        <hr>
+
+        <!-- Change Password -->
+        <h4>Change Password</h4>
+        <form method="POST" action="{% url 'change_password' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">New Password</label>
+                <input type="password" name="new_password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">Change Password</button>
+        </form>
+
+        <hr>
+
+        <hr>
+
+<!-- Privacy Settings -->
+<h4 class="privacy-heading">Privacy Settings</h4>
+
+<div class="privacy-container">
+    <!-- Logout from All Devices -->
+    <div class="privacy-item">
+        <p>Sign out from all devices to ensure your account security.</p>
+        <a href="{% url 'logout_all' %}" class="btn btn-success">Logout from All Devices</a>
+    </div>
+
+    <!-- Account Visibility -->
+    <div class="privacy-item">
+        <label class="form-label">Account Visibility</label>
+        <select class="form-select">
+            <option selected>Public</option>
+            <option>Private</option>
+        </select>
+        <p class="privacy-desc">Set your account to public or private to control who can view your profile.</p>
+    </div>
+
+    <!-- Delete Account -->
+    <div class="privacy-item delete-section">
+        <p class="text-danger">Deleting your account will remove all your data permanently.</p>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Delete Account</button>
+    </div>
+</div>
+<!-- Delete Account Modal -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Account Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                
+                <!-- Add a form for account deletion -->
+                <form method="POST" action="{% url 'delete_account' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 250px;
+        background: #2c3e50;
+        padding: 0 10px;
+        color: #ecf0f1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+    }
+
+    .sidebar h2 {
+        font-family: 'Josefin Sans', sans-serif;
+        font-weight: bold;
+        font-size: 1.8rem;
+        padding-top: 20px;
+    }
+
+    .sidebar ul {
+        margin-top: 20px;
+        list-style: none;
+        padding: 0;
+        width: 100%;
+    }
+
+    .sidebar ul li a {
+        color: #ecf0f1;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background 0.3s;
+    }
+
+    .sidebar ul li a .material-icons {
+        margin-right: 10px;
+    }
+
+    .sidebar ul li a:hover, .sidebar ul li a.active {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Main Content */
+    .main-container {
+        margin-left: 250px;
+        width: calc(100% - 250px);
+        display: flex;
+        flex-direction: column;
+       
+    }
+
+    /* Navbar */
+    .navbar {
+        background: rgba(31, 54, 77, 0.3);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        top: 0;
+        left: 250px;
+        width: calc(100% - 250px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        color: white;
+        z-index: 1000;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .navbar h2 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+    
+    .container {
+        margin-top: 100px;
+        padding: 20px;
+        background: white;
+    }
+
+    .container h2 {
+        font-weight: 600;
+        padding-top: 60px;
+    }
+
+    .form-label {
+        font-weight: 500;
+    }
+
+    .btn {
+        border-radius: 5px;
+        padding: 10px 15px;
+    }
+
+.privacy-container {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.privacy-heading {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.privacy-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    border-left: 4px solid #2c3e50;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.privacy-item p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.privacy-item .form-label {
+    font-weight: 500;
+}
+
+.privacy-desc {
+    font-size: 13px;
+    color: #777;
+}
+
+.delete-section {
+    border-left-color: #dc3545;
+}
+
+</style>
+
+{% endblock %}

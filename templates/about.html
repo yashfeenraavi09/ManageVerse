@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About ManageVerse{% endblock title %}
+
+{% block body %}
+<style>
+    .about-container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 40px 20px;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Typewriter Effect */
+    .about-heading {
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: white;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 4px solid white;
+        width: 0;
+        margin: 0 auto 50px; 
+        display: inline-block; 
+        animation: typing 3s steps(30, end) forwards, blink 0.7s infinite;
+    }
+
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 40%; }
+    }
+
+    @keyframes blink {
+        50% { border-color: transparent; }
+    }
+
+    .card-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .about-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease-in-out;
+        color: black;
+        width: 320px; /* Consistent card size */
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .about-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .about-card p, .about-card ul {
+        text-align: left; 
+        padding-left: 15px; 
+    }
+
+    .about-card ul {
+        list-style: none; 
+        padding: 0;
+    }
+
+    .about-card ul li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .about-card ul li i {
+        color: #007bff;
+        font-size: 1.2rem;
+    }
+
+    .icon {
+        font-size: 3rem;
+        color: #007bff;
+        margin-bottom: 10px;
+    }
+    .black-icon {
+        color: black !important;
+    }
+    
+    h4{
+        font-weight: bold;
+    }
+    .cta-btn {
+        background-color:rgb(236, 225, 162);
+        color: black;
+        padding: 14px 24px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        text-decoration: none;
+        border-radius: 8px;
+        display: inline-block;
+        margin-top: 40px;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .cta-btn:hover {
+        background-color:rgb(165, 200, 238);
+        transform: scale(1.05);
+    }
+</style>
+
+<div class="about-container">
+    <h2 class="about-heading">About ManageVerse</h2>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="about-card">
+                <div class="icon"><i class="fas fa-tasks"></i></div>  
+                <h4>What is ManageVerse?</h4>
+                <p>
+                    <i class="fas fa-tasks"></i> ManageVerse is a project management tool <br>
+                    <i class="fas fa-chart-line"></i> Track progress and meet deadlines
+                </p>
+                
+            </div>
+        </div>
+
+     
+<div class="col-md-4">
+    <div class="about-card">
+        <div class="icon"><i class="fas fa-rocket"></i></div>  
+        <h4>Why We Built It?</h4>
+        <ul class="list-unstyled">
+            <li><i class="fas fa-check-circle black-icon"></i> Task management made simple</li>
+            <li><i class="fas fa-bolt black-icon"></i> Streamlined workflow for efficiency</li>
+            <li><i class="fas fa-tasks black-icon"></i> Track progress without complications</li>
+        </ul>
+        
+        
+    </div>
+</div>
+
+      
+        <div class="col-md-4">
+            <div class="about-card">
+                <div class="icon"><i class="fas fa-users"></i></div>  
+                <h4>Who Can Use It?</h4>
+                <p>
+                    <i class="fas fa-user-graduate"></i> <b>Students</b> – Manage assignments & group projects <br>
+                    <i class="fas fa-people-group"></i> <b>Collaboration</b> – Organize work with teammates
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <a href="{% url 'choose_role' %}" class="cta-btn">Get Started for Free</a>
+</div>
+
+{% endblock body %}

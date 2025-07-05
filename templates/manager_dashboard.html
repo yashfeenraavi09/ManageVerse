@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ManageVerse</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&family=Outfit:wght@100..900&family=Ovo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Google Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+     <!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #2c3e50;
+            padding: 0 10px; /* Reduce padding */
+            color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh; /* Full height */
+            position: fixed; /* Fix sidebar in place */
+            top: 0;
+            left: 0;
+            overflow-y: auto; /* Enable scrolling within the sidebar if needed */
+        }
+        
+
+        .sidebar h2 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-weight: bold;
+            font-size: 1.8rem;
+            padding-top: 20px;
+        }
+
+        .sidebar ul {
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        
+
+        .sidebar ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .sidebar ul li a .material-icons {
+            margin-right: 10px;
+        }
+        .sidebar ul li a {
+    transition: background 0.3s;
+    border-radius: 5px;
+}
+
+.sidebar ul li a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+
+        .main-container {
+            margin-left: 250px; /* Push content to the right */
+            width: calc(100% - 250px); /* Adjust width */
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .navbar {
+            background: #2c3e50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            
+            color: white;
+            width: 100%;
+        }
+     
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 250px; /* Aligns with the sidebar */
+            width: calc(100% - 250px);
+            background: rgba(31, 54, 77, 0.3); /* Light transparent background */
+            backdrop-filter: blur(10px); /* Blur effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            color: white;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+        }
+    
+        .scrolled {
+            background: rgba(31, 54, 77, 0.6); /* Darker background when scrolling */
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+        .sidebar {
+            margin-top: 0;
+        }        
+        .navbar h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .navbar .btn {
+            background: rgb(255, 255, 255);
+            border: none;
+            padding: 10px 20px;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .navbar .btn:hover {
+            background: rgb(154, 171, 200);
+        }
+
+        /* Content */
+        .content {
+            margin-top: 50px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .content h3 {
+            margin-bottom: 20px; /* Adds space below "Your Recent Projects" */
+        }
+
+        /* Your Recent Projects Heading */
+.content h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.content h3 .material-icons {
+    font-size: 2rem;
+    margin-right: 10px;
+    color: #22a6b3; /* Teal color */
+}
+
+
+.projects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between cards */
+}
+
+
+.project-card {
+    flex: 1 1 calc(33.333% - 20px); 
+    min-width: 280px; 
+}
+
+/* Project Card Styling */
+.project-card {
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+.project-card h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #34495e;
+    display: flex;
+    align-items: center;
+}
+
+.project-card h4 .material-icons {
+    font-size: 1.5rem;
+    margin-right: 8px;
+    color:rgb(34, 135, 230); 
+}
+
+.project-card p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+
+.project-card small {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.project-actions {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.project-actions a {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.project-actions a i {
+    margin-right: 5px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 40px 30px;
+    width: 400px;
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal input, .modal textarea, .modal select {
+    width: 100%;
+    margin: 10px 0 20px;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.modal input:focus, .modal textarea:focus, .modal select:focus {
+    border-color: #5e9eff;
+    outline: none;
+}
+
+/* Buttons */
+.modal .btn {
+    padding: 10px 20px;
+    border: none;
+    background-color:rgb(17, 114, 156);
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    margin: 10px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal .btn:hover {
+    background-color: #327ae6;
+}
+
+@keyframes fadeIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.alert-container {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    z-index: 1000;
+    width: auto;
+    max-width: 250px;
+}
+
+.alert {
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    color: white;
+    background: #27ae60; /* Default Green for Success */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.alert.error { background: #e74c3c; } /* Red for Errors */
+.alert.warning { background: #f39c12; } /* Orange for Warnings */
+.alert.info { background: #3498db; } /* Blue for Info */
+
+.close-btn {
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+    margin-left: 10px;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background-color: #f8f9fa; 
+    color: #333;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 250px);
+    padding: 20px;
+}
+
+.content {
+    padding: 20px;
+}
+
+h3 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.project-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.project-card h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #34495e;
+    display: flex;
+    align-items: center;
+}
+
+.project-card h4 .material-icons {
+    font-size: 1.5rem;
+    margin-right: 8px;
+    color: #1abc9c; 
+}
+
+.project-card p {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 10px 0;
+}
+
+.project-card small {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.pinned-projects a {
+    text-decoration: none;
+    color: #007bff; 
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+}
+
+.pinned-projects a:hover {
+    color: #0056b3; /* Darker shade of blue */
+    text-decoration: underline;
+}
+
+.pinned-projects .btn-danger {
+    background-color: #dc3545; 
+    border: none;
+    padding: 3px 8px;
+    font-size: 12px;
+    transition: background-color 0.3s;
+    color : white;
+}
+
+.pinned-projects .btn-danger:hover {
+    background-color: #c82333;
+    color : white;
+}
+
+.project-card.pinned {
+    border: 2px solid #f39c12;
+}
+
+
+.tasks,
+.your-tasks,
+.pinned-projects,
+.announcements,
+.alerts,
+.daily-goals,
+.progress-summary,
+.time-tracking {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alert-container {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    z-index: 1000;
+    width: auto;
+    max-width: 250px;
+}
+
+.alert {
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    color: white;
+    background: #27ae60; /* Green */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.alert.error { background: #e74c3c; }
+.alert.warning { background: #f39c12; }
+.alert.info { background: #3498db; }
+
+.close-btn {
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+    margin-left: 10px;
+}
+
+.progress {
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 10px;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #1abc9c; /* Teal */
+}
+
+.time-tracking p {
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.task-container {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    transition: box-shadow 0.3s ease;
+}
+
+.task-container:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.task-container p {
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.task-container .btn {
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+    padding: 6px 14px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.task-container .material-icons {
+    font-size: 18px;
+    margin-right: 4px;
+}
+
+.task-container .btn-outline-primary {
+    border: 1px solid #1976d2;
+    color: #1976d2;
+}
+
+.task-container .btn-outline-primary:hover {
+    background-color: #1976d2;
+    color: white;
+}
+
+.task-container .btn-outline-info {
+    border: 1px solid #0288d1;
+    color: #0288d1;
+}
+
+.task-container .btn-outline-info:hover {
+    background-color: #0288d1;
+    color: white;
+}
+.no-tasks {
+    font-style: italic;
+    color: #888;
+    margin-top: 10px;
+}
+
+     
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>ManageVerse</h2>
+        <ul>
+            <li><a href="{% url 'manager_dashboard' %}" class="active"><span class="material-icons">dashboard</span> Dashboard</a></li>
+            <li><a href="{% url 'projects_page' %}"><span class="material-icons">assignment</span> Projects</a></li>
+            <li><a href="{% url 'settings_page' %}"><span class="material-icons">settings</span> Settings</a></li>
+            <li><a href="{% url 'logout' %}"><span class="material-icons">logout</span> Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Container (Navbar + Content) -->
+    <div class="main-container">
+        
+       <!-- Navbar -->
+<div class="navbar">
+    <h2>Welcome, {{ request.user.username }}!</h2>
+
+    {% if request.user.role == 'manager' %}
+        <button class="btn" id="openModal">+ Add Project</button>
+    {% endif %}
+</div>
+
+
+ <!-- Content -->
+<div class="content">
+    <h3><span class="material-icons">folder</span> Your Recent Projects</h3>
+    <div class="projects">
+        {% for project in projects %}
+            <div class="project-card">
+                <!-- Project Name -->
+                <h4><span class="material-icons">work</span> {{ project.name }}</h4>
+
+                <!-- Description -->
+                <p>{{ project.description }}</p>
+
+                <!-- Created At -->
+                <small>Created on: {{ project.created_at|date:"F j, Y" }}</small><br>
+
+                <!-- Category -->
+                <p><strong>Category:</strong> {{ project.category }}</p>
+
+                <!-- Lead -->
+                <p><strong>Project Lead:</strong> {{ project.lead.get_full_name|default:project.lead.username }}</p>
+
+                <!-- Show Manager only for user role -->
+{% if request.user.role == 'user' %}
+<p><strong>Manager:</strong> {{ project.user.get_full_name|default:project.user.username }}</p>
+{% endif %}
+
+               <!-- Members -->
+<p><strong>Team Members:</strong>
+    {% for member in project.team_members.all %}
+        {{ member.get_full_name|default:member.username }}{% if not forloop.last %}, {% endif %}
+    {% empty %}
+        No members assigned.
+    {% endfor %}
+</p>
+
+                <!-- Tasks Count -->
+                <p><strong>Tasks:</strong> {{ project.tasks.count }} task{{ project.tasks.count|pluralize }}</p>
+
+                <!-- Buttons Section -->
+                <div class="project-actions">
+                    <!-- Pin/Unpin Project Button -->
+                    {% if project.pinned %}
+                        <a href="{% url 'unpin_project' project.id %}" class="btn btn-danger">
+                            <i class="material-icons">push_pin</i> Unpin
+                        </a>
+                    {% else %}
+                        <a href="{% url 'pin_project' project.id %}" class="btn btn-primary">
+                            <i class="material-icons">push_pin</i> Pin
+                        </a>
+                    {% endif %}
+
+                    {% if project.user == request.user %}
+                    <!-- Only show to the project manager -->
+                    <a href="{% url 'assign_task' project.id %}" class="btn btn-success">
+                        <i class="material-icons">assignment</i> Assign Task
+                    </a>
+                {% endif %}
+                
+                    <!-- View or Set Deadline Button -->
+{% if request.user.role == 'user' %}
+{% if project.deadline %}
+    <a class="btn btn-info disabled">
+        <i class="material-icons">event</i> Deadline: {{ project.deadline|date:"M d, Y" }}
+    </a>
+{% else %}
+    <a class="btn btn-secondary disabled">
+        <i class="material-icons">event</i> Deadline not set
+    </a>
+{% endif %}
+{% else %}
+{% if project.deadline %}
+    <a href="{% url 'view_deadline' project.id %}" class="btn btn-info">
+        <i class="material-icons">event</i> Deadline: {{ project.deadline|date:"M d, Y" }}
+    </a>
+{% else %}
+    <a href="{% url 'set_deadline' project.id %}" class="btn btn-secondary">
+        <i class="material-icons">event</i> Set Deadline
+    </a>
+{% endif %}
+{% endif %}
+
+<!--  Delete Button (Visible only to managers) -->
+{% if request.user.role == 'manager' %}
+    <form action="{% url 'delete_project' project.id %}" method="POST" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this project?');">
+            <i class="material-icons" style="font-size: 18px; vertical-align: middle;">delete</i> Delete
+        </button>
+    </form>
+{% endif %}
+
+
+{% for task in project.tasks.all %}
+    <div class="task-container">
+        <p><strong>{{ task.title }}</strong>
+        {% if task.assigned_to %}
+            <small>(Assigned to: {{ task.assigned_to.username }})</small>
+        {% endif %}</p>
+
+        {% if request.user.role == 'user' %}
+            <a href="{% url 'task_detail' task.id %}" class="btn btn-outline-primary">
+                <i class="material-icons">comment</i> View / Add Comments
+            </a>
+        {% else %}
+            <a href="{% url 'task_detail' task.id %}" class="btn btn-outline-info">
+                <i class="material-icons">comment</i> Manage Comments
+            </a>
+        {% endif %}
+    </div>
+{% empty %}
+    <p class="no-tasks">No tasks assigned yet.</p>
+{% endfor %}
+
+                </div>
+            </div>
+        {% empty %}
+            <p>No projects found. Start adding your projects!</p>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="projectModal">
+    <div class="modal-content">
+        <h3>Add New Project</h3>
+        <form method="POST" action="{% url 'add_project' %}">
+            {% csrf_token %}
+
+            <!-- Project Name -->
+            <input type="text" name="name" placeholder="Project Name" required>
+
+            <!-- Description -->
+            <textarea name="description" placeholder="Project Description"></textarea>
+
+            <!-- Project Lead (Single Select) -->
+            <label for="lead">Project Lead:</label>
+            <select name="lead" id="lead" required>
+                <option value="">Select Lead</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Team Members (Multi Select) -->
+            <label for="team_members">Team Members:</label>
+            <select name="team_members" id="team_members" multiple required>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Category -->
+            <label for="category">Category:</label>
+            <select name="category" id="category" required>
+                <option value="">Select Category</option>
+                <option value="Development">Development</option>
+                <option value="Design">Design</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Research">Research</option>
+            </select>
+
+            <!-- Buttons -->
+            <button type="submit" class="btn">Save</button>
+            <button type="button" class="btn" id="closeModal">Close</button>
+        </form>
+    </div>
+</div>
+
+
+
+    {% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}">
+                {{ message }}
+                <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<!---your task section (shown only if user is not manager)-->
+{% if request.user.role != 'manager' %}
+<div class="your-tasks">
+    {% if request.user.role == 'user' %}
+        <h3><i class="material-icons">assignment</i> Your Work Queue</h3>
+    {% else %}
+        <h3><i class="material-icons">assignment</i> Your Tasks</h3>
+    {% endif %}
+
+    {% if request.user.assigned_tasks.all %}
+        {% for task in request.user.assigned_tasks.all %}
+            <div class="task-card">
+                <h4>{{ task.title }}</h4>
+                <p>{{ task.description }}</p>
+                <p>Status: <strong>{{ task.status }}</strong></p>
+                <p><small>Project: {{ task.project.name }}</small></p>
+
+                {% if task.status != 'Completed' %}
+                    <form method="post" action="{% url 'mark_task_completed' task.id %}"> 
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success">Mark as Completed</button>
+                    </form>
+                {% else %}
+                    <span class="badge bg-success">Completed</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        {% if request.user.role == 'user' %}
+            <p><i class="fa fa-info-circle"></i> Nothing in your Work Queue yet.</p>
+        {% else %}
+            <p><i class="fa fa-info-circle"></i> No tasks assigned yet.</p>
+        {% endif %}
+    {% endif %}
+</div>
+{% endif %}
+
+
+
+
+<div class="pinned-projects">
+    <h3><i class="fa fa-thumbtack"></i> Pinned Projects</h3>
+    <ul>
+        {% for project in pinned_projects %}
+            <li>
+                <i class="fa fa-folder"></i> <a href="#">{{ project.name }}</a>
+                <a href="{% url 'unpin_project' project.id %}" class="btn btn-sm btn-danger">
+                    <i class="fa fa-times"></i> Unpin
+                </a>
+            </li>
+        {% empty %}
+            <p><i class="fa fa-info-circle"></i> No pinned projects yet.</p>
+        {% endfor %}
+    </ul>
+</div>
+
+
+
+<div class="alerts">
+    <h3><i class="fa fa-hourglass-half"></i> Upcoming Deadlines</h3>
+    <ul>
+        {% for project in upcoming_deadlines %}
+            <li>
+                <strong><i class="fa fa-folder-open"></i> {{ project.name }}</strong> 
+                - Due on <span datetime="{{ project.deadline }}">{{ project.deadline|date:"M d, Y" }}</span>
+                
+                {% if project.days_left <= 2 %}
+                    <span class="badge bg-danger"><i class="fa fa-exclamation-triangle"></i> Urgent</span>
+                {% elif project.days_left <= 5 %}
+                    <span class="badge bg-warning"><i class="fa fa-clock"></i> Upcoming</span>
+                {% else %}
+                    <span class="badge bg-success"><i class="fa fa-check-circle"></i> On Track</span>
+                {% endif %}
+            </li>
+        {% empty %}
+            <p><i class="fa fa-calendar-times"></i> No upcoming deadlines.</p>
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById('openModal').addEventListener('click', function() {
+            document.getElementById('projectModal').style.display = 'flex';
+        });
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('projectModal').style.display = 'none';
+        });
+            setTimeout(function() {
+                let alerts = document.querySelectorAll(".alert");
+                alerts.forEach(alert => {
+                    alert.style.display = "none";
+                });
+            }, 3000);   
+            
+            
+                window.addEventListener("scroll", function() {
+                    var navbar = document.querySelector(".navbar");
+                    if (window.scrollY > 10) {
+                        navbar.classList.add("scrolled");
+                    } else {
+                        navbar.classList.remove("scrolled");
+                    }
+                });
+                function togglePin(event, projectId) {
+                    event.preventDefault();
+                    
+                    let projectCard = document.querySelector(`.project-card[data-id='${projectId}']`);
+                    let pinnedSection = document.getElementById("pinned-projects");
+                    let projectList = document.getElementById("project-list");
+                
+                    if (projectCard.classList.contains("pinned")) {
+                        // Unpin project: move it back to the main project list
+                        projectCard.classList.remove("pinned");
+                        pinnedSection.removeChild(projectCard);
+                        projectList.appendChild(projectCard);
+                        event.target.innerHTML = `<i class="fas fa-thumbtack"></i> Pin`;
+                    } else {
+                        // Pin project: move it to the pinned section
+                        projectCard.classList.add("pinned");
+                        pinnedSection.appendChild(projectCard);
+                        event.target.innerHTML = `<i class="fas fa-thumbtack"></i> Unpin`;
+                    }
+                }
+                
+            
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#team_members').select2({
+            placeholder: "Select team members"
+        });
+        $('#lead').select2({
+            placeholder: "Select a lead"
+        });
+    });
+</script>
+
+</body>
+</html>
