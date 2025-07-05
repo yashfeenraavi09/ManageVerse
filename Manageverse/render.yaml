@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: manageverse
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn Manageverse.wsgi:application
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.8
